@@ -168,6 +168,8 @@ plt.title("M5 model Evaluation")
 plt.legend(["Train"])
 plt.show()
 
+# Testing the model on the nearly mnist dataset
+
 # Get the nearly mnist from Kaggle to test
 import numpy as np
 
@@ -183,9 +185,11 @@ data = data.reshape(data.shape[0], 28, 28, 1)
 print(data.shape)
 print(target.shape)
 
+# Dynamically finding the best model to be used.
 import os
 import re
-# Dynamically finding the best model to be used.
+
+# Name for the directory where the models are stored
 model_dir = 'model_M7-rot14-wid0.1-hei0.1-zoom0.7to1.3'
 
 # List all .h5 files in the directory
@@ -202,8 +206,6 @@ best_model_path = os.path.join(model_dir, best_model_file)
 
 print(f"Loading best model: {best_model_path}")
 model = keras.models.load_model(best_model_path)
-
-# model = keras.models.load_model('model_M7-rot14-wid0.1-hei0.1-zoom0.7to1.3/18-0.99690.h5')
 outputs = model.predict(data)
 labels_predicted = np.argmax(outputs, axis=1)
 correct_classified = sum(labels_predicted == target_flat)
